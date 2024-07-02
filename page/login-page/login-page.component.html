@@ -1,0 +1,38 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="container">
+  <div class="row border rounded-5 p-3 shadow box-area" id="row">
+    <div class="col-md-6 rounded-4  d-flex justify-content-center align-items-center flex-column left-box" id="left">
+      <div class="image mb-3">
+        <img src="../../../assets/images/loginPicture.jpg" alt="loginPicture" class="img-fluid" id="loginPicture">
+      </div>
+      <h3 id="imageText">Accedi</h3>
+    </div>
+    <div class="col-md-6 right-box" id="right">
+      <div class="row align-items-center">
+        <div class="header-text mb-4">
+          <h3>Salve di nuovo!</h3>
+          <h4>Siamo felici di rivederti</h4>
+        </div>
+        <small id="wrongEmail">Email inesistente, riprovare</small>
+        <div class="input-group mb-1">
+          <input type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email" #emailPlaceHolder required id="emailPlaceHolder">
+        </div>
+        <small id="wrongPassword">Password errata, riprovare</small>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" #passwordPlaceHodler id="passwordPlaceHodler">
+        </div>
+        <div class="input-group mb-3">
+          <button class="btn btn-lg w-100 fs-6" id="loginButton" (click)="loginUser(emailPlaceHolder.value, passwordPlaceHodler.value)">Login</button>
+        </div>
+        <div class="input-group mb-3">
+          <button class="btn btn-lg w-100 fs-6" id="googleLoginButton" (click)="googleLogin()">
+            <img src="../../../assets/images/googleLoginButton.png" alt="logoGoogle" id="googlePhotoLogin" class="me-2">
+            <small>Accedi tramite Google</small>
+          </button>
+        </div>
+        <div class="row" id="iscrizioneLink">
+          <small>Non hai ancora un account? <a routerLink="../signup">Iscriviti</a></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

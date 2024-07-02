@@ -1,0 +1,59 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="container">
+  <div class="row border rounded-5 p-3 shadow box-area" id="row">
+    <div class="col-md-6 right-box" id="left">
+      <div class="row align-items-center">
+        <div class="header-text mb-4">
+          <h3>Saluti!</h3>
+          <h4>Raccontaci qualcosa di te</h4>
+        </div>
+        <small id="existingEmail">Email già esistente</small>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Email" #emailPlaceHolder>
+        </div>
+        <div class="input-group mb-2">
+          <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" #passwordPlaceHolder>
+        </div>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Nome" #nomePlaceHolder>
+        </div>
+        <div class="input-group mb-1">
+          <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Cognome" #cognomePlaceHolder>
+        </div>
+        <div class="input-group mb-2">
+          <select class="form-select" title="department" id="departmentSelect">
+            <option *ngFor="let department of departments">{{department?.name}}</option>
+          </select>
+        </div>
+        <div class="input-group mb-2">
+          <input class="form-control" list="browsers" name="browser" id="browser" placeholder="Gender" #genderPlaceHolder>
+          <datalist id="genderList">
+            <option value="Maschio">
+            <option value="Femmina">
+            <option value="Altro">
+          </datalist>
+        </div>
+        <div class="input-group mb-3">
+          <button class="btn btn-lg w-100 fs-6" id="signUpButton"
+            (click)="signUpUser(emailPlaceHolder.value, passwordPlaceHolder.value, nomePlaceHolder.value, cognomePlaceHolder.value, genderPlaceHolder.value)">
+            Iscriviti
+          </button>
+        </div>
+        <div class="input-group mb-3">
+          <button class="btn btn-lg w-100 fs-6" id="googleLoginButton" (click)="googleSignUp()">
+            <img src="../../../assets/images/googleLoginButton.png" alt="logoGoogle" id="googlePhotoSignUp" class="me-2">
+            <small>Iscriviti con Google</small>
+          </button>
+        </div>
+        <div class="row" id="accessoLink">
+          <small>Hai già un'account? <a routerLink="../login">Accedi</a></small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 rounded-4  d-flex justify-content-center align-items-center flex-column right-box" id="right">
+      <div class="image mb-3">
+        <img src="../../../assets/images/signUpPicture.jpg" alt="loginPicture" class="img-fluid" id="signUpPicture">
+      </div>
+      <h3 id="imageText">Unisciti a noi</h3>
+    </div>
+  </div>
+</div>

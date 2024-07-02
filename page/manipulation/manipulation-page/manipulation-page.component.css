@@ -1,0 +1,27 @@
+.box-area{
+  width: 930px;
+  background-color: whitesmoke;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+div h1,h5{
+  font-family: Stencil Std, fantasy;
+  color: #2b2b2d;
+}
+
+div h5{
+  padding-bottom: 20px;
+}
+
+#nonExistingCourse{
+  visibility: hidden;
+  color: #950217;
+}
+
+#selectPhoto, #selectText{
+  width: 90px;
+  background-color: #2b2b2d;
+  color: goldenrod;
+}

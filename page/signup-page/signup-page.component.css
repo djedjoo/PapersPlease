@@ -1,0 +1,55 @@
+.box-area{
+  width: 930px;
+  background-color: whitesmoke;
+}
+
+#right{
+  background-color: #2b2b2d;
+}
+
+#loginPicture{
+  padding-top: 10px;
+  width: auto;
+}
+
+#imageText{
+  font-family: Stencil Std, fantasy;
+  font-weight: 500;
+  color:goldenrod;
+}
+
+#left h3{
+  color: #2b2b2d;
+}
+
+#left h4{
+  color: #2b2b2d;
+}
+
+#signUpButton{
+  background-color: goldenrod;
+  color:#2b2b2d;
+}
+
+#googleLoginButton{
+  background-color: #dcdcdc;
+  color: #2b2b2d;
+}
+
+#googlePhotoSignUp{
+  width: 20px;
+}
+
+#accessoLink{
+  text-align: center;
+}
+
+#existingEmail{
+  visibility: hidden;
+  color: #950217;
+}
+
+#nonExistingCourse{
+  visibility: hidden;
+  color: #950217;
+}

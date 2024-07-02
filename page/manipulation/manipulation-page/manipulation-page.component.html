@@ -1,0 +1,406 @@
+<!-- Form used for the lesson insert -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="insertTextContainer" *ngIf="insert">
+  <div class="row border rounded-5 p-3 shadow box-area" id="row">
+    <h1>Inserisci la tua lezione</h1>
+    <div class="mb-3 mt-3">
+      <h5>Scegli il tipo di lezione da inserire: </h5>
+      <input type="radio" class="btn-check" name="photo" id="text" autocomplete="off" required title="text">
+      <label class="btn btn-warning" for="male" (click)="setText()" id="selectText">Text</label>
+      <!-- To simulate the space -->
+      <input type="radio" class="btn-check" name="photo" id="qui" autocomplete="off" required title="photo" >
+      <label class="btn btn-sm btn-outline-secondary" style="visibility: hidden;">qui</label>
+
+      <input type="radio" class="btn-check" name="photo" id="photo" autocomplete="off" required title="photo">
+      <label class="btn btn-warning" for="male" (click)="setPhoto()" id="selectPhoto">File</label>
+    </div>
+
+    <!-- If text -->
+    <form id="TextLesson" *ngIf="text && !admin">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText">
+      </div>
+      <div class="mb-3 mt-3">
+        <textarea class="form-control" rows="5" id="lessonText" name="lessonText" placeholder="Scrivi qui la tua lezione"></textarea>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#insertModal">Inserisci</button>
+    </form>
+
+    <!-- If file -->
+    <form id="TextLesson" *ngIf="photo && !admin">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <div class="mb-3 mt-3">
+        <input type="file" name = "lessonPhoto" id="lessonText" placeholder="Photo">
+      </div>
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#insertModal">Inserisci</button>
+    </form>
+  </div>
+
+</div>
+
+
+<!-- Form used for the lesson update -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="insertTextContainer" *ngIf="update">
+  <div class="row border rounded-5 p-3 shadow box-area" id="row">
+    <h1>Scegli la lezione da aggiornare</h1>
+    <div class="mb-3 mt-3">
+      <h5>Dicci di che tipo di lezione si tratta: </h5>
+      <input type="radio" class="btn-check" name="photo" id="text" autocomplete="off" required title="text">
+      <label class="btn btn-warning" for="male" (click)="setText()" id="selectText">Text</label>
+      <!-- To simulate the space -->
+      <input type="radio" class="btn-check" name="photo" id="qui" autocomplete="off" required title="photo" >
+      <label class="btn btn-sm btn-outline-secondary" style="visibility: hidden;">qui</label>
+
+      <input type="radio" class="btn-check" name="photo" id="photo" autocomplete="off" required title="photo">
+      <label class="btn btn-warning" for="male" (click)="setPhoto()" id="selectPhoto">File</label>
+    </div>
+
+    <!-- If text -->
+    <form id="TextLesson" *ngIf="text && !admin">
+      <div class="mb-3 mt-3">
+        <small id="nonExistingCourse">Lezione da te fornita non trovata</small>
+        <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+      </div>
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText" *ngIf="found" >
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label" *ngIf="found">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText"  *ngIf="found" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <div class="mb-3 mt-3">
+        <textarea class="form-control" rows="5" id="lessonText" name="lessonText" placeholder="Scrivi qui la tua lezione" *ngIf="found && text"></textarea>
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLesson()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" style="visibility: hidden;" *ngIf="found">Aggiorna</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" *ngIf="found">Aggiorna</button>
+    </form>
+
+    <form id="TextLesson" *ngIf="text && admin">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText" *ngIf="found" >
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label" *ngIf="found">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText"  *ngIf="found" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <div class="mb-3 mt-3">
+        <textarea class="form-control" rows="5" id="lessonText" name="lessonText" placeholder="Scrivi qui la tua lezione" *ngIf="found && text"></textarea>
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLessonAdmin()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModalAdmin" *ngIf="found">Aggiorna</button>
+    </form>
+
+    <!-- If file -->
+    <form id="TextLesson" *ngIf="photo && !admin">
+      <div class="mb-3 mt-3">
+        <small id="nonExistingCourse">Lezione da te fornita non trovata</small>
+        <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+      </div>
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText" *ngIf="found">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label"  *ngIf="found">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText"  *ngIf="found" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <small id="fileChooser" *ngIf="found">Scegli il nuovo file</small>
+      <div class="mb-3 mt-3">
+        <input type="file" name = "lessonPhoto" id="lessonText" placeholder="Photo" *ngIf="found">
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLesson()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" style="visibility: hidden;" *ngIf="found">Aggiorna</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" *ngIf="found">Aggiorna</button>
+    </form>
+
+    <form id="TextLesson" *ngIf="photo && admin">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="argumentText" placeholder="Il nome della lezione" name="argumentText" *ngIf="found">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label"  *ngIf="found">Visibilità: </label>
+        <select class="form-select" id="visibilityText" name="visibilityText"  *ngIf="found" title="visibilityText">
+          <option>Pubblico</option>
+          <option>Privato</option>
+        </select>
+      </div>
+      <small id="fileChooser" *ngIf="found">Scegli il nuovo file</small>
+      <div class="mb-3 mt-3">
+        <input type="file" name = "lessonPhoto" id="lessonText" placeholder="Photo" *ngIf="found">
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLessonAdmin()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModalAdmin" style="visibility: hidden;" *ngIf="found">Aggiorna</button>
+    </form>
+  </div>
+
+
+</div>
+
+
+<!-- Form used for the lesson remove -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="insertTextContainer" *ngIf="remove">
+  <div class="row border rounded-5 p-3 shadow box-area" id="row">
+    <h1>Scegli la lezione da eliminare</h1>
+    <div class="mb-3 mt-3">
+      <h5>Dicci di che tipo di lezione si tratta: </h5>
+      <input type="radio" class="btn-check" name="photo" id="text" autocomplete="off" required title="text">
+      <label class="btn btn-warning" for="male" (click)="setText()" id="selectText">Text</label>
+      <!-- To simulate the space -->
+      <input type="radio" class="btn-check" name="photo" id="qui" autocomplete="off" required title="photo" >
+      <label class="btn btn-sm btn-outline-secondary" style="visibility: hidden;">qui</label>
+
+      <input type="radio" class="btn-check" name="photo" id="photo" autocomplete="off" required title="photo">
+      <label class="btn btn-warning" for="male" (click)="setPhoto()" id="selectPhoto">File</label>
+    </div>
+
+    <!-- If text -->
+    <form id="TextLesson" *ngIf="text && !admin">
+      <div class="mb-3 mt-3">
+        <small id="nonExistingCourse">Lezione da te fornita non trovata</small>
+        <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLessonRemove()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" style="visibility: hidden;" *ngIf="found">Rimuovi</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" *ngIf="found">Rimuovi</button>
+    </form>
+
+    <form id="TextLesson" *ngIf="text && admin">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLessonRemoveAdmin()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModalAdmin" style="visibility: hidden;" *ngIf="found">Rimuovi</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" *ngIf="found">Rimuovi</button>
+    </form>
+
+    <!-- If file -->
+    <form id="TextLesson" *ngIf="photo && !admin">
+      <div class="mb-3 mt-3">
+        <small id="nonExistingCourse">Lezione da te fornita non trovata</small>
+        <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+      </div>
+      <button type="button" class="btn btn-warning"  (click)="searchLessonRemove()" *ngIf="!found">Ricerca</button>
+
+      <button type="button" class="btn btn-warning"  (click)="retry()" *ngIf="found">Riprova</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" style="visibility: hidden;" *ngIf="found">Rimuovi</button>
+
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" *ngIf="found">Rimuovi</button>
+    </form>
+  </div>
+
+  <form id="TextLesson" *ngIf="photo && admin">
+    <div class="mb-3 mt-3">
+      <input type="text" class="form-control" id="researchText" placeholder="Il nome della lezione da modificare" name="argumentText">
+    </div>
+    <button type="button" class="btn btn-warning"  (click)="searchLessonRemoveAdmin()" *ngIf="!found">Ricerca</button>
+
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModalAdmin" style="visibility: hidden;" *ngIf="found">Rimuovi</button>
+
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#removeModal" *ngIf="found">Rimuovi</button>
+  </form>
+
+
+</div>
+
+
+
+<!-- The modal of INSERT confirmation -->
+<div class="modal" id="insertModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler inserire la lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="insertLesson()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The modal of UPDATE confirmation -->
+<div class="modal" id="updateModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler aggiornare la lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="renovateLesson()">Sicuro!</button>
+        <button type="button" class="btn btn-danger">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="updateModalAdmin">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler aggiornare la lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="renovateLessonAdmin()">Sicuro!</button>
+        <button type="button" class="btn btn-danger">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The modal of INSERT confirmation -->
+<div class="modal" id="removeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler eliminare la lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="removeLesson()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>+
+
+<div class="modal" id="removeModalAdmin">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler eliminare la lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="removeLessonAdmin()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The modal used to let the user know that the operation has been successful -->
+<div class="modal" id="successModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Operazione eseguita con successo</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Grazie per rendere PapersPlease un posto migliore!
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Ottimo!</button>
+      </div>
+
+    </div>
+  </div>
+</div>

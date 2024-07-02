@@ -1,0 +1,55 @@
+.box-area{
+  width: 930px;
+  background-color: whitesmoke;
+}
+
+#left{
+  background-color: #2b2b2d;
+}
+
+#loginPicture{
+  padding-top: 10px;
+  width: auto;
+}
+
+#imageText{
+  font-family: Stencil Std, fantasy;
+  font-weight: 500;
+  color:goldenrod;
+}
+
+#right h3{
+  color: #2b2b2d;
+}
+
+#right h4{
+  color: #2b2b2d;
+}
+
+#loginButton{
+  background-color: goldenrod;
+  color:#2b2b2d;
+}
+
+#googleLoginButton{
+  background-color: #dcdcdc;
+  color: #2b2b2d;
+}
+
+#googlePhotoLogin{
+  width: 20px;
+}
+
+#iscrizioneLink{
+  text-align: center;
+}
+
+#wrongEmail{
+  visibility: hidden;
+  color: #950217;
+}
+
+#wrongPassword{
+  visibility: hidden;
+  color: #950217;
+}

@@ -1,0 +1,314 @@
+<div class="container-fluid" id="userContainer">
+  <div class="row">
+    <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+      <br>
+      <h2  (click)="houseMenu()"><fa-icon [icon]="houseIcon"></fa-icon> Info</h2>
+      <br>
+      <hr>
+      <br>
+      <h2  (click)="preferredMenu()"><fa-icon [icon]="preferredIcon"></fa-icon> Preferiti</h2>
+      <br>
+      <hr>
+      <br>
+      <h2  (click)="lessonMenu()"><fa-icon [icon]="lessonIcon"></fa-icon> Lezioni</h2>
+      <br>
+      <hr>
+      <br>
+      <h2  (click)="eBooksMenu()"><fa-icon [icon]="eBooksIcon"></fa-icon> EBooks</h2>
+      <br>
+      <hr>
+      <br>
+      <h2  (click)="clear()"><fa-icon [icon]="logoutIcon"></fa-icon> Logout</h2>
+      <br>
+      <hr id="minimized">
+    </div>
+
+
+    <div class="col-md-1 col-lg-1 col-xl-1 mx-auto mt-1">
+      <div class="vl"></div>
+    </div>
+
+    <div class="col-md-7 col-lg-7 col-xl-7 mx-auto mt-7" *ngIf="houseOpen">
+      <h1 class="hover-1">Info</h1>
+      <br>
+      <h3>Nome: {{user?.name}}</h3>
+      <br>
+      <h3>Cognome: {{user?.surname}}</h3>
+      <br>
+      <h3>Dipartimento: {{user?.course}}</h3>
+      <br>
+      <h3>Gender: {{user?.gender}}</h3>
+    </div>
+
+    <div class="col-md-7 col-lg-7 col-xl-7 mx-auto mt-7" *ngIf="preferredOpen">
+      <h2 *ngIf="empty"> nulla</h2>
+      <div class="row">
+        <h1 class="hover-1">Preferiti</h1>
+        <div *ngFor="let favourite of favouritesList" class="col-md-6 col-lg-6 col-xl-4">
+
+          <div class="card" *ngIf="favourite?.type == 'text'">
+            <div class="card-header" id="card-header" routerLink="../singleText/{{favourite?.favourite.id}}/text" (click)="trueRead(favourite?.id)"><h3>{{favourite?.favourite.argument}}</h3></div>
+            <div class="card-body"  routerLink="../singleText/{{favourite?.favourite.id}}/text" (click)="trueRead(favourite?.id)">
+              <img src="../../../../assets/images/lessonTextIcon.jpg" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.done == 'false'">
+              <img src="../../../../assets/images/readFavourite.jpg" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.done == 'true'">
+            </div>
+            <div class="card-footer" id="card-footer">
+              <h6 class="card-subtitle">{{favourite?.favourite.department}}</h6>
+              <button type="button" class="btn btn-danger" id="removeFavouriteButton" data-bs-toggle="modal" data-bs-target="#removeFavouriteModal" (click)="setUpFavouriteId(favourite?.id)">Rimuovi</button>
+            </div>
+          </div>
+
+          <div class="card" *ngIf="favourite?.type == 'photo'">
+            <div class="card-header" id="card-header" routerLink="../singleText/{{favourite?.favourite.id}}/photo" (click)="trueRead(favourite?.id)"><h3>{{favourite?.favourite.argument}}</h3></div>
+            <div class="card-body" routerLink="../singleText/{{favourite?.favourite.id}}/photo" (click)="trueRead(favourite?.id)">
+              <img src="../../../../assets/images/txtIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.favourite.type == 'text' && favourite?.done == 'false'">
+              <img src="../../../../assets/images/wordIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.favourite.type == 'word' && favourite?.done == 'false'">
+              <img src="../../../../assets/images/pdfIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.favourite.type == 'pdf' && favourite?.done == 'false'">
+              <img src="{{favourite?.favourite.image}}" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.favourite.type == 'img' && favourite?.done == 'false'">
+              <img src="../../../../assets/images/readFavourite.jpg" alt="favouritePicture" class="img-fluid" *ngIf="favourite?.done == 'true'">
+            </div>
+            <div class="card-footer" id="card-footer">
+              <h6 class="card-subtitle">{{favourite?.favourite.department}}</h6>
+              <button type="button" class="btn btn-danger" id="removeFavouriteButton" data-bs-toggle="modal" data-bs-target="#removeFavouriteModal" (click)="setUpFavouriteId(favourite?.id)">Rimuovi</button>
+            </div>
+          </div>
+
+          <div class="card" *ngIf="favourite?.type == 'eBook'">
+            <div class="card-header" id="card-header" routerLink="../singleEBook/{{favourite?.favourite.id}}"><h3>{{favourite?.favourite.title}}</h3></div>
+            <div class="card-body" routerLink="../singleEBook/{{favourite?.favourite.id}}" *ngIf="favourite?.type == 'eBook'">
+              <img src="../../../../assets/images/eBookIcon.jpg" alt="favouritePicture" class="img-fluid">
+            </div>
+            <div class="card-footer" id="card-footer">
+              <button type="button" class="btn btn-danger" id="removeFavouriteButton" data-bs-toggle="modal" data-bs-target="#removeFavouriteModal" (click)="setUpFavouriteId(favourite?.id)">Rimuovi</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 col-lg-7 col-xl-7 mx-auto mt-7" *ngIf="lessonOpen">
+      <h2 *ngIf="emptyLesson"> nulla</h2>
+      <div class="row">
+        <h1 class="hover-1">Lezioni</h1>
+        <div *ngFor="let lesson of userLessons" class="col-md-6 col-lg-6 col-xl-4">
+
+          <div class="card" *ngIf="lesson?.type == 'text'">
+            <div class="card-header" id="card-header" routerLink="../singleText/{{lesson?.lesson.id}}/text"><h3>{{lesson?.lesson.argument}}</h3></div>
+            <div class="card-body">
+              <img src="../../../../assets/images/lessonTextIcon.jpg" alt="favouritePicture" class="img-fluid" routerLink="../singleText/{{lesson?.lesson.id}}/text">
+            </div>
+            <div class="card-footer" id="card-footer">
+              <button type="button" class="btn btn-warning" id="updateLessonButton" data-bs-toggle="modal" data-bs-target="#updateLessonEBookModal" (click)="setUpLessonId(lesson?.lesson.id, typeText)">Modifica</button>
+            </div>
+          </div>
+
+          <div class="card" *ngIf="lesson?.type == 'photo'">
+          <div class="card-header" id="card-header" routerLink="../singleText/{{lesson?.lesson.id}}/photo"><h3>{{lesson?.lesson.argument}}</h3></div>
+          <div class="card-body" routerLink="../singleText/{{lesson?.lesson.id}}/photo">
+            <img src="../../../../assets/images/txtIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="lesson?.lesson.type == 'text'">
+              <img src="../../../../assets/images/wordIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="lesson?.lesson.type == 'word'">
+              <img src="../../../../assets/images/pdfIcon.png" alt="favouritePicture" class="img-fluid" *ngIf="lesson?.lesson.type == 'pdf'">
+              <img src="{{lesson?.lesson.image}}" alt="favouritePicture" class="img-fluid" *ngIf="lesson?.lesson.type == 'img'">
+          </div>
+          <div class="card-footer" id="card-footer">
+            <button type="button" class="btn btn-warning" id="updateLessonButton" data-bs-toggle="modal" data-bs-target="#updateLessonEBookModal" (click)="setUpLessonId(lesson?.lesson.id, typePhoto)">Modifica</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 col-lg-7 col-xl-7 mx-auto mt-7" *ngIf="eBooksOpen">
+      <h2 *ngIf="emptyEBook">Nulla</h2>
+      <div class="row">
+        <h1 class="hover-1">EBooks <fa-icon [icon]="createEBook" id="createIcon" data-bs-toggle="modal" data-bs-target="#createRequestModal"></fa-icon>
+          <fa-icon [icon]="createRandomEBook" id="invisibleIcon" data-bs-toggle="modal" data-bs-target="#createRandomRequestModal"></fa-icon>
+          <fa-icon [icon]="createRandomEBook" id="randomIcon" data-bs-toggle="modal" data-bs-target="#createRandomRequestModal"></fa-icon></h1>
+        <div *ngFor="let eBook of eBooks" class="col-md-6 col-lg-6 col-xl-4">
+          <div class="card">
+            <div class="card-header" id="card-header"><h3 routerLink="../singleEBook/{{eBook?.id}}">{{eBook.title}}</h3></div>
+            <div class="card-body">
+              <img src="../../../../assets/images/eBookIcon.jpg" alt="eBookPicture" class="img-fluid" id="eBookPicture" routerLink="../singleEBook/{{eBook?.id}}">
+            </div>
+            <div class="card-footer" id="card-footer">
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12 col-xl-6">
+                  <button type="button" class="btn btn-warning" id="updateButton" data-bs-toggle="modal" data-bs-target="#updateRequestModal" (click)="setUpId(eBook?.id)">Modifica</button>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-12 col-xl-6">
+                  <button type="button" class="btn btn-danger" id="deleteButton" data-bs-toggle="modal" data-bs-target="#removeRequestModal" (click)="setUpId(eBook?.id)">Elimina</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="createRequestModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Desideri creare un nuovo EBook?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#creationModal">Facciamolo!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non so...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="createRandomRequestModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Desideri creare un nuovo EBook?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="createRandom()">Facciamolo!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non so...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="creationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Scegli il nome del nuovo EBook</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-2">
+          <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="EBook" id="eBookPlaceHolder">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="sel1" class="form-label">Visibilità: </label>
+          <select class="form-select" id="visibilityInsert" name="visibility" title="visibility">
+            <option>Pubblico</option>
+            <option>Privato</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="createEBookOperation()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="updateRequestModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Rinomina il tuo EBook</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-2">
+          <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="EBook" id="updateEBookPlaceHolder">
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="sel1" class="form-label">Visibilità: </label>
+          <select class="form-select" id="visibilityUpdate" name="visibility" title="visibilityUpdate">
+            <option>Pubblico</option>
+            <option>Privato</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="updateEBookOperation()">Aggiorna!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="removeRequestModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Elimina questo EBook</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        Vuoi davvero eliminare questo EBook?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="deleteEBookOperation()">Elimina!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="updateLessonEBookModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>In quale EBook vuoi inserire questa lezione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 mt-3">
+          <select class="form-select" id="lessonEBook" name="lessonEBook" title="lessonEBook">
+            <option *ngFor="let eBook of eBooks">{{eBook?.title}}</option>
+            <option>Nessuno</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="updateLessonEBook()">Aggiungi!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="removeFavouriteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Vuoi davvero rimuovere questa lezioni dai tuoi Preferiti?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="deleteFavourite()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="successModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Nessun problema!</h4>
+      </div>
+      <div class="modal-body">
+        Operazione eseguita con successo!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Perfetto!</button>
+      </div>
+    </div>
+  </div>
+</div>

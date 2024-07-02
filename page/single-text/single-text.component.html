@@ -1,0 +1,145 @@
+<div class="container-fluid" id="container">
+  <div class="row">
+    <div class="col-md-8 col-lg-8 col-xl-8 mx-auto mt-8">
+      <app-lessontemplate idString="{{lessonId}}" type="{{type}}"></app-lessontemplate>
+      <div class="row" id="left">
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+          <button type="button" class="btn btn-danger" (click)="youtube()" id="youtubeButton">Cerca video su youtube</button>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4" *ngIf="type == 'photo'">
+          <button type="button" class="btn btn-warning" (click)="download()" id="downloadButton" >Download</button>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+          <button type="button" class="btn btn-warning" (click)="checkFavourite()" id="favouriteButton" data-bs-toggle="modal" data-bs-target="#favouriteModal" *ngIf="loggedUser">Aggiungi ai preferiti</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+      <div class="card mt-5" *ngFor="let review of reviews" id="reviewCard">
+        <div class="card-header" id="card-header">{{review.title}}</div>
+        <div class="card-body">{{review?.text}}</div>
+        <div class="card-footer" id="card-footer">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mt-6">
+              <h6 *ngIf="review?.score == '5'">Valutazione: Eccellente</h6>
+              <h6 *ngIf="review?.score == '4'">Valutazione: Ottima</h6>
+              <h6 *ngIf="review?.score == '3'">Valutazione: Buona</h6>
+              <h6 *ngIf="review?.score == '2'">Valutazione: Mediocre</h6>
+              <h6 *ngIf="review?.score == '1'">Valutazione: Non Ottimale</h6>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mt-6">
+              <h6>Scritta da: {{review?.name}} {{review?.surname}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container-fluid" id="addReviewContainer" *ngIf="loggedUser">
+  <div class="card">
+    <div class="card-header" id="card-header">
+      <h4>Facci sapere cosa ne pensi</h4>
+    </div>
+    <div class="card-body" id="card-body">
+      <div class="mb-3 mt-3">
+        <input type="text" class="form-control" id="title" placeholder="Titolo" name="title">
+      </div>
+    </div>
+    <div class="card-footer" id="card-footerWrite">
+      <div class="mb-3 mt-3">
+        <textarea class="form-control" rows="5" id="reviewText" name="reviewText" placeholder="La tua recensione"></textarea>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label">Valutazione: </label>
+        <select class="form-select" id="score" name="score" title="score">
+          <option>Eccellente</option>
+          <option>Ottima</option>
+          <option>Buona</option>
+          <option>Mediocre</option>
+          <option>Non ottimale</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#insertModal">Inserisci</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- The modal of INSERT confirmation -->
+<div class="modal" id="insertModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler inserire la recensione?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#successModal" (click)="insertReview()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The modal used to let the user know that the operation has been successful -->
+<div class="modal" id="successModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Operazione eseguita con successo</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Grazie per rendere PapersPlease un posto migliore!
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Ottimo!</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="favouriteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Operazione eseguita con successo</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        La lezione è stata salvata nei tuoi preferiti
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Grazie!</button>
+      </div>
+
+    </div>
+  </div>
+</div>
