@@ -1,0 +1,47 @@
+<div class="container d-flex justify-content-center align-items-center" id="container">
+    <div class="card">
+      <div class="card-header" id="header-card"><h1>{{activeEBookCredentials?.eBook.title}}</h1></div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngFor="let lesson of eBookLessons" class="col-md-6 col-lg-6 col-xl-4">
+
+            <div class="card" *ngIf="lesson?.type == 'text'">
+              <div class="card-header" id="card-header" routerLink="../singleText/{{lesson?.lesson.id}}text"><h3>{{lesson?.lesson.argument}}</h3></div>
+              <div class="card-body" routerLink="../singleText/{{lesson?.lesson.argument}}/{{lesson?.lesson.email}}/{{lesson?.lesson.department}}/text">
+                <img src="../../../../assets/images/lessonTextIcon.jpg" alt="textPicture" class="img-fluid">
+              </div>
+              <div class="card-footer" id="card-footer">
+
+              </div>
+            </div>
+
+            <div class="card" *ngIf="lesson?.type == 'photo'">
+              <div class="card-header" id="card-header"><h3>{{lesson?.lesson.argument}}</h3></div>
+              <div class="card-body">
+                <img src="../../../../assets/images/txtIcon.png" alt="txtIcon" class="img-fluid" id="imagePhoto" *ngIf="lesson?.lesson.type == 'text'">
+                <img src="../../../../assets/images/wordIcon.png" alt="txtIcon" class="img-fluid" id="imagePhoto" *ngIf="lesson?.lesson.type == 'word'">
+                <img src="../../../../assets/images/pdfIcon.png" alt="txtIcon" class="img-fluid" id="imagePhoto" *ngIf="lesson?.lesson.type == 'pdf'">
+                <img src="{{lesson?.lesson.image}}" alt="txtIcon" class="img-fluid" id="imagePhoto" *ngIf="lesson?.lesson.type == 'img'">
+              </div>
+              <div class="card-footer" id="card-footer">
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" id="footer-card">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-6">
+            <h4 class="card-title">Fornito da:</h4>
+            <h5>{{activeEBookCredentials?.name}} {{activeEBookCredentials?.surname}}</h5>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-6">
+            <h4 class="card-title">Valutazione degli utenti:</h4>
+            <h5>{{score}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

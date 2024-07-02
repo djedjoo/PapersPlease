@@ -1,0 +1,29 @@
+.container-fluid {
+  text-align: center;
+  background-color: #2b2b2d;
+}
+
+.container-fluid h6,p{
+  color: #dcdcdc;
+}
+
+#buttonTwitter{
+  background-color: lightblue;
+  color: #dcdcdc;
+}
+
+#buttonFB{
+  background-color: #0077b6;
+  color: #dcdcdc;
+}
+
+#buttonInsta{
+  background-color: purple;
+  color: #dcdcdc;
+}
+
+div div div h6{
+  color: goldenrod;
+  font-family: Stencil Std, fantasy;
+  font-size: 25px;
+}

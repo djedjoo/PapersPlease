@@ -1,0 +1,56 @@
+<div class="card" *ngIf="text">
+  <h1 class="card-header" id="card-header">{{activeText?.lesson.argument}}</h1>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8 col-lg-8 col-xl-8 mx-auto mt-8">
+      </div>
+    </div>
+    <p class="card-text">{{activeText?.lesson.text}}</p>
+  </div>
+  <div class="card-footer" id="card-footer">
+    <div class=" row">
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Dipartimento:</h4>
+        <h5>{{activeText?.department}}</h5>
+      </div>
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Fornita da:</h4>
+        <h5>{{activeText?.name}} {{activeText?.surname}}</h5>
+      </div>
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Valutazione degli utenti:</h4>
+        <h5>{{score}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" *ngIf="!text">
+  <h1 class="card-header" id="card-header">{{activePhoto?.photo.argument}}</h1>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8 col-lg-8 col-xl-8 mx-auto mt-8">
+      </div>
+    </div>
+    <img src="../../../assets/images/txtIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="activePhoto?.photo.type == 'text'">
+    <img src="../../../assets/images/wordIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="activePhoto?.photo.type == 'word'">
+    <img src="../../../assets/images/pdfIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="activePhoto?.photo.type == 'pdf'">
+    <img src="{{ activePhoto?.photo.image }}" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="activePhoto?.photo.type == 'img'">
+  </div>
+  <div class="card-footer" id="card-footer">
+    <div class=" row">
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Dipartimento:</h4>
+        <h5>{{activePhoto?.department}}</h5>
+      </div>
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Fornita da:</h4>
+        <h5>{{activePhoto?.name}} {{activePhoto?.surname}}</h5>
+      </div>
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-4">
+        <h4 class="card-title">Valutazione degli utenti:</h4>
+        <h5>{{score}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

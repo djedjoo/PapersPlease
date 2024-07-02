@@ -1,0 +1,42 @@
+#review{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 400px;
+  padding-top: 34px; /*56 is the navbar width, so 56+the wanted padding, this is needed since navbar is fixed*/
+  padding-bottom: 34px;
+  text-align: center;
+}
+
+#carosello{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 34px; /*56 is the navbar width, so 56+the wanted padding, this is needed since navbar is fixed*/
+  padding-bottom: 34px;
+
+}
+
+.hover-1 {
+  background: linear-gradient(goldenrod 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  transition: 0.4s, background-position 0s;
+  cursor: default;
+}
+.hover-1:hover {
+  --p: 100%;
+  color: #2b2b2d;
+}
+
+#carosello h4{
+  font-style: italic;
+}
+
+::ng-deep .carousel-control-prev-icon {
+  background-image: url("../../../assets/images/leftArrowIcon.png");
+}
+
+::ng-deep .carousel-control-next-icon {
+  background-image: url("../../../assets/images/rightArrowIcon.png");
+}

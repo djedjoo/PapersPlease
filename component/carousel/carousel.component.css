@@ -1,0 +1,74 @@
+#carouselText{
+  padding-top: 90px;
+  padding-bottom: 34px;
+  padding-left: 60px;
+  padding-right: 60px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.row{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+div h1{
+  font-family: Stencil Std, fantasy;
+}
+
+div h4{
+  padding-top: 30px;
+}
+
+.hover-1 {
+  background: linear-gradient(#2b2b2b 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  transition: 0.4s, background-position 0s;
+  cursor: default;
+  --p: 100%;
+  color: goldenrod;
+}
+
+.card{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-title{
+  margin-bottom: 15px;
+}
+
+.card-subtitle{
+  margin-bottom: 15px;
+}
+
+.btn-warning{
+  background-color: goldenrod;
+  max-width: 200px;
+  color: #2b2b2d;
+}
+
+#carouselPhoto{
+  padding-bottom: 34px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+#card-header{
+  background-color: goldenrod;
+  font-family: Stencil Std, fantasy;
+}
+
+
+#card-footer{
+  background-color: #2b2b2b;
+  color: goldenrod;
+}
+
+div img{
+  min-height: 400px;
+}

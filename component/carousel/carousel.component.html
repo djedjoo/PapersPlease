@@ -1,0 +1,45 @@
+<div class="container-fluid" id="carouselText" *ngIf="textBool">
+  <div class="row" id="textRow" >
+    <h1 class="hover-1">Testi Scritti</h1>
+    <div *ngFor="let lesson of firstFourTextsCredentials" class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="card"  routerLink="../../singleText/{{lesson?.lesson.id}}//text">
+        <div class="card-header" id="card-header"><h3>{{lesson?.lesson.argument}}</h3></div>
+        <div class="card-body">
+          <img src="../../../assets/images/lessonTextIcon.jpg" alt="loginPicture" class="img-fluid" id="loginPicture">
+        </div>
+        <div class="card-footer" id="card-footer">
+          <h6 class="card-subtitle">{{lesson?.department}}</h6>
+          <p class="card-text">Fornito da: {{lesson?.name}} {{lesson?.surname}}</p>
+          <button type="button" class="btn btn-danger" id="adminButton" (click)="setUpTextId(lesson?.lesson.id)" routerLink="../../lesson/update" *ngIf="admin">Ricerca</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <button type="button" class="btn btn-warning" (click)="showMoreText()" *ngIf="!showMoreTexts">Mostrane altri</button>
+    <button type="button" class="btn btn-warning" *ngIf="showMoreTexts" routerLink="../../fullLessons/text/{{department}}">Mostrali tutti</button>
+</div>
+
+
+<div class="container-fluid" id="carouselPhoto"  *ngIf="photoBool">
+  <div class="row" id="photoRow">
+    <h1 class="hover-1">Files di vario tipo</h1>
+    <div *ngFor="let lesson of firstFourPhotosCredentials" class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="card" routerLink="../../singleText/{{lesson?.photo.id}}/photo">
+        <div class="card-header" id="card-header"><h3>{{lesson?.photo.argument}}</h3></div>
+        <div class="card-body">
+          <img src="../../../assets/images/txtIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="lesson?.photo.type == 'text'">
+          <img src="../../../assets/images/wordIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="lesson?.photo.type == 'word'">
+          <img src="../../../assets/images/pdfIcon.png" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="lesson?.photo.type == 'pdf'">
+          <img src="{{ lesson?.photo.image }}" alt="loginPicture" class="img-fluid" id="loginPicture" *ngIf="lesson?.photo.type == 'img'">
+        </div>
+        <div class="card-footer" id="card-footer">
+          <h6 class="card-subtitle">{{lesson?.department}}</h6>
+          <p class="card-text">Fornito da: {{lesson?.name}} {{lesson?.surname}}</p>
+          <button type="button" class="btn btn-danger" id="adminButton" (click)="setUpPhotoId(lesson?.photo.id)" routerLink="../../lesson/update" *ngIf="admin">Ricerca</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-warning" (click)="showMorePhoto()" *ngIf="!showMorePhotos">Mostrane altri</button>
+  <button type="button" class="btn btn-warning" *ngIf="showMorePhotos" routerLink="../../fullLessons/photo/{{department}}">Mostrali tutti</button>
+</div>

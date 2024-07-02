@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md fixed-top" id="myNavbar" >
+  <div class="container-fluid">
+    <span class="navbar-brand">PapersPlease</span>
+    <button
+			class="navbar-toggler"
+			type="button"
+			aria-controls="navbarContent"
+			[attr.aria-expanded]="!collapsed"
+			aria-label="Toggle navigation"
+			(click)="collapsed = !collapsed"
+      id="buttonToggleNavbar"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+    <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button"> Dipartimenti </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end" id="subMenu">
+            <a *ngFor="let department of departments" ngbDropdownItem class="sub-menu-link" routerLink="dipartimenti/{{department?.name}}">{{department?.name}} ></a>
+					</div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="fullLessons/text">Testi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="fullLessons/photo">Files</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="ebooks">EBooks</a>
+        </li>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button" *ngIf="logged">Gestisci Lezioni</a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end" id="subMenu">
+            <a ngbDropdownItem class="sub-menu-link" routerLink="lesson/insert">Inserisci</a>
+            <a ngbDropdownItem class="sub-menu-link" routerLink="lesson/update">Modifica</a>
+            <a ngbDropdownItem class="sub-menu-link" routerLink="lesson/remove">Elimina</a>
+					</div>
+        </li>
+      </ul>
+      <img src="../../../assets/images/gold-user-icon-free-png.png" alt="Profilo" class="user-pic" routerLink="login" *ngIf="!logged">
+      <img src={{loggedUser?.imageUrl}} alt="Profilo" class="user-pic" routerLink="userPage" *ngIf="logged">
+    </div>
+  </div>
+</nav>
+
+

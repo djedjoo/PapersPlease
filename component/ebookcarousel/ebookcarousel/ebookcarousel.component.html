@@ -1,0 +1,50 @@
+<div class="container-fluid" id="ebooksContainer">
+  <div class="row" id="ebooksRow">
+    <h1 class="hover-1">EBooks</h1>
+    <div class="mb-3 mt-3">
+      <h5>Filtra per:</h5>
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning" (click)="filter(alphabetic)">Alfabetico</button>
+        <button type="button" class="btn btn-warning" (click)="filter(reverseAlphabetic)">Alfabetico(Inverso)</button>
+        <button type="button" class="btn btn-warning" (click)="filter(score)">Valutazioni</button>
+      </div>
+    </div>
+    <div *ngFor="let eBook of eBooksCredentials" class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="card" routerLink="../singleEBook/{{eBook?.eBook.id}}">
+        <div class="card-header" id="card-header"><h3>{{eBook?.eBook.title}}</h3></div>
+        <div class="card-body">
+          <img src="../../../../assets/images/eBookIcon.jpg" alt="eBookPicture" class="img-fluid" id="eBookPicture">
+        </div>
+        <div class="card-footer" id="card-footer">
+          <p class="card-text">Fornito da: {{eBook?.name}} {{eBook?.surname}}</p>
+          <button type="button" class="btn btn-danger" id="adminButton" (click)="setUpEBookId(eBook?.eBook.id)" *ngIf="admin" data-bs-toggle="modal" data-bs-target="#adminModal">Rimuovi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="adminModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sei sicuro di voler eliminare questo EBook?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" title="dismiss"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Scegli un'opzione
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="deleteAdmin()">Sicuro!</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fammici pensare...</button>
+      </div>
+
+    </div>
+  </div>
+</div>
